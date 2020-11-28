@@ -20,6 +20,11 @@ adonis new yardstick
 ```
 
 or manually clone the repo and then run `npm install`.
+git clone git@gitlab.com:landro2019/dashSong.git
+cd dashSong
+npm install
+adonis serve --dev
+
 
 
 ### Migrations
@@ -29,3 +34,9 @@ Run the following command to run startup migrations.
 ```js
 adonis migration:run
 ```
+
+## Create and setup .env file
+```
+make a copy of .env.example and rename to .env
+adonis key:generate
+put database credentials in .env file
