@@ -12,8 +12,7 @@ class AuthController {
     const validation = await validateAll(request.all(), {
       username: 'required|unique:users,username',
       email: 'required|email|unique:users,email',
-      phone: 'required|string',
-      password: 'required|confirmed'
+      password: 'required'
     })
 
     if (validation.fails()) {
