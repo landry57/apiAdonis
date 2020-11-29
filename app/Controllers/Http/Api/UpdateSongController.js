@@ -1,5 +1,6 @@
 'use strict'
 const { validate,validateAll } = use("Validator");
+const UpdateSong = use("App/Models/UpdateSong");
 const Helpers = use("Helpers");
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -19,19 +20,14 @@ class UpdateSongController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    const updates = await UpdateSong.query()
+    .with('song').fetch();
+    return response.status(200).json({
+      data: updates,
+    });
   }
 
-  /**
-   * Render a form to be used for creating a new updatesong.
-   * GET updatesongs/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
-  }
+
 
   /**
    * Create/save a new updatesong.
@@ -42,6 +38,20 @@ class UpdateSongController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const validation = await validateAll(request.all(), {
+      song_id: "required|integer",
+    });
+
+    if (validation.fails()) {
+      return validation.messages();
+    }
+
+    const data = validation._data;
+    data.status = 1;
+    const res = await UpdateSong.create(data);
+    return response.status(201).json({
+      data: res,
+    });
   }
 
   /**
@@ -54,19 +64,15 @@ class UpdateSongController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const updatesong = await UpdateSong.find(params.id)
+    await updatesong.loadMany(['song'])
+    return response.status(200).json({
+      data: updatesong,
+    });
+  
   }
 
-  /**
-   * Render a form to update an existing updatesong.
-   * GET updatesongs/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
+ 
 
   /**
    * Update updatesong details.
@@ -77,6 +83,16 @@ class UpdateSongController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const updatesong = await UpdateSong.find(params.id);
+    if(!request.all()){
+      return response.status(422).json({error:'You need to specify a different value to update'});
+    }
+
+    updatesong.song_id = parseInt(request.input('song_id'))
+  
+    await  updatesong.save();
+
+    return response.status(204).json({data:updatesong})
   }
 
   /**
@@ -88,7 +104,20 @@ class UpdateSongController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    try {
+      const updatesong = await UpdateSong.find(params.id);
+     
+      if (!updatesong) {
+        return response.status(400).json({ error: 'updatesong not found by ID' });
+      }
+     
+        correction.delete();
+      return response.status(200).json({ success: `updatesong deleted successfully ${params.id}` })
+    } catch (err) { }
+
+
   }
+  
 }
 
 module.exports = UpdateSongController

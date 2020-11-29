@@ -4,6 +4,10 @@
 const Model = use('Model')
 
 class Correction extends Model {
+    
+      song() {
+        return this.belongsTo('App/Models/Song','song_id')
+      }
 }
 
 module.exports = Correction

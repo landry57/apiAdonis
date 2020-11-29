@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Suggestion extends Model {
+    category() {
+        return this.belongsTo('App/Models/Categorie','categorie_id')
+      }
 }
 
 module.exports = Suggestion

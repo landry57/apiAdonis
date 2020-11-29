@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class UpdateSong extends Model {
+    song() {
+        return this.belongsTo('App/Models/Song','song_id')
+      }
 }
 
 module.exports = UpdateSong

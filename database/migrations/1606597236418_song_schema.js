@@ -12,7 +12,6 @@ class SongSchema extends Schema {
       table.string('content').nullable();
       table.string('path',100).nullable();
       table.string('type',100).nullable();
-      table.string('type').nullable();
       table.string('imei',20).nullable();
       table.boolean('status').defaultTo(0);
       table.integer('categorie_id').unsigned().references('id').inTable('categories').onDelete('cascade');
