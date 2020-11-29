@@ -3,7 +3,7 @@
 class HomeController {
 
     home({ view }) {
-        return view.render('index')
+        return view.render('pages.home')
     }
 
 }
