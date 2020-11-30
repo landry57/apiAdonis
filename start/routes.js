@@ -67,3 +67,5 @@ Route.get('/','Views/HomeController.home').as('home')
 Route.get('/category','Views/CategorieController.category').as('category')
 Route.get('/login','Views/LoginController.loginView').as('login')
 
+
+//posts

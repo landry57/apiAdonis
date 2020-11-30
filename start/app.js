@@ -48,7 +48,9 @@ const aceProviders = [
 |   { Route: 'Adonis/Src/Route' }
 |
 */
-const aliases = {}
+const aliases = {
+  'AuthController': 'App/Controllers/Http/Api/AuthController',
+}
 
 /*
 |--------------------------------------------------------------------------
