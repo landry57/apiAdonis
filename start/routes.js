@@ -63,10 +63,13 @@ Route.group(() => {
 
 
 //views routers
-Route.get('/','Views/HomeController.home').as('home')
-Route.get('/category','Views/CategorieController.category').as('category')
+Route.group(()=>{
+  Route.get('/home','Views/HomeController.home').as('home')
+  Route.get('/category','Views/CategorieController.category').as('category')
+}).middleware(['auth'])
+
+
 Route.get('/login','Views/LoginController.loginView').as('login')
-
-
 //posts
 Route.post('/login','Views/LoginController.postLogin').as('login')
+Route.get('logout', 'Views/LoginController.PostLogout').as('logout')

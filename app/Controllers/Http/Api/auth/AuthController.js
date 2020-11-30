@@ -40,21 +40,20 @@ class AuthController {
 
 
 
-  async confirmEmail({ params, response }) {
-    // get user with the cinfirmation token
-    const user = await User.findBy('confirmation_token', params.token)
-    if (!user) {
-      return response.status(400).json({ error: 'User not found by token' })
+    async confirmEmail({ params, response }) {
+      // get user with the cinfirmation token
+      const user = await User.findBy('confirmation_token', params.token)
+      if (!user) {
+        return response.status(400).json({ error: 'User not found by token' })
+      }
+      // set confirmation to null and is_active to true
+      console.log(user)
+      user.confirmation_token = null
+      user.is_active = true
+      //persist user to database
+      await user.save()
+      return response.json({ success: 'Your account is confirmed successfully' })
     }
-    // set confirmation to null and is_active to true
-    console.log(user)
-    user.confirmation_token = null
-    user.is_active = true
-    //persist user to database
-    await user.save()
-    return response.json({ success: 'Your account is confirmed successfully' })
-  }
-
 
 
 
@@ -65,7 +64,9 @@ class AuthController {
       })
 
       if (validation.fails()) {
-        return validation.messages();
+        const err = validation.messages()
+         return response.status(403).json({errors:err});
+       
       }
       const data = validation._data
 
@@ -76,22 +77,27 @@ class AuthController {
         .first()
 
       const isSame = await Hash.verify(data.password, user.password)
-      if (isSame) {
-      
-          let accessToken = await auth.generate(user)
-          return response.json({ "data": { "user": user, "access_token": accessToken } })
     
-
+      if (isSame) {
+           await auth.login(user)
+          return response.json({ data:"Successfull" })
+      }else{
+        return response.status(403).json({ error:"You first need to register!" })
       }
 
     }
     catch (e) {
-      console.log(e)
-      return response.json({ message: 'You first need to register!' })
+    
+      return response.status(403).json({ error: 'You first need to register!' })
     }
 
   }
 
+
+  async logout({ auth, response }) {
+    await auth.logout()
+    return response.json({ success: 'Successfull' })
+  }
 }
 
 module.exports = AuthController

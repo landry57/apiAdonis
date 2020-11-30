@@ -21,6 +21,13 @@ class ExceptionHandler extends BaseExceptionHandler {
    * @return {void}
    */
   async handle (error, { request, response }) {
+    if (error.code === 'E_INVALID_SESSION') {
+      return response.redirect('/login')
+    }
+
+    if (error.code === 'E_ROUTE_NOT_FOUND') {
+      return response.redirect('/home')
+    }
     response.status(error.status).json({"error":error.message})
   }
 
