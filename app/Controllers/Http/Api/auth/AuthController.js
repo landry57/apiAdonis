@@ -59,15 +59,15 @@ class AuthController {
 
 
   async login({ request, auth, response }) {
-    const validation = await validateAll(request.all(), {
-      email: 'required|email',
-      password: 'required'
-    })
+      const validation = await validateAll(request.all(), {
+        email: 'required|email',
+        password: 'required'
+      })
 
-    if (validation.fails()) {
-      return validation.messages();
-    }
-    const data = validation._data
+      if (validation.fails()) {
+        return validation.messages();
+      }
+      const data = validation._data
 
     try {
       const user = await User.query()

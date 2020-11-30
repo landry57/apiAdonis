@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         loader(true);
       },
       success: (data) => {
-
+          console.log(data.data)
         loader(false);
       },
       error: function (data) {

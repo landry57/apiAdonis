@@ -69,3 +69,4 @@ Route.get('/login','Views/LoginController.loginView').as('login')
 
 
 //posts
+Route.post('/login','Views/LoginController.postLogin').as('login')
