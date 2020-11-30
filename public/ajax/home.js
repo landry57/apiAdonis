@@ -23,7 +23,7 @@ function logout(ur) {
     });
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: ur,
         success: (data) => {
             window.location.href = "/login";

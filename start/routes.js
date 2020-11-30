@@ -72,4 +72,4 @@ Route.group(()=>{
 Route.get('/login','Views/LoginController.loginView').as('login')
 //posts
 Route.post('/login','Views/LoginController.postLogin').as('login')
-Route.get('logout', 'Views/LoginController.PostLogout').as('logout')
+Route.post('logout', 'Views/LoginController.PostLogout').as('logout')
