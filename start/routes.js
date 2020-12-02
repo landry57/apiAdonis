@@ -64,8 +64,25 @@ Route.group(() => {
 
 //views routers
 Route.group(()=>{
+  //get
   Route.get('/home','Views/HomeController.home').as('home')
-  Route.get('/category','Views/CategorieController.category').as('category')
+  Route.get('/category','Views/CategorieController.listView').as('category')
+  Route.get('/category/:id','Views/CategorieController.getCategoryById')
+  Route.get('/listCategory','Views/CategorieController.getCategory')
+  //========SONG========//
+  Route.get('/song','Views/SongController.listView').as('song')
+  Route.get('/song/add','Views/SongController.addView')
+
+  //post
+  Route.post('/addCategory','Views/CategorieController.createCategory')
+
+  //put
+  Route.put('/editCategory/:id','Views/CategorieController.editCategory')
+
+ //delete
+ Route.delete('/deleteCategory/:id','Views/CategorieController.deleteCategory')
+
+  
 }).middleware(['auth'])
 
 

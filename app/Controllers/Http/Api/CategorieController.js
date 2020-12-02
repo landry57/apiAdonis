@@ -42,10 +42,12 @@ class CategorieController {
     });
 
     if (validation.fails()) {
-      return validation.messages()
+      const err = validation.messages()
+      return response.status(403).json({errors:err});
     }
      const data =validation._data
      data.status= 1;
+     data.categorieName= (request.input('categorieName')).toUpperCase();
      const res = await  Categorie.create(data)
     return response.status(201).json({data:res});
 
@@ -82,11 +84,18 @@ class CategorieController {
       return response.status(422).json({error:'You need to specify a different value to update'});
     }
 
-    categorie.categorieName = request.input('categorieName')
-    categorie.status = parseInt(request.input('status'))
-    await  categorie.save();
+    
+    if(request.input('categorieName')){
+      categorie.categorieName = (request.input('categorieName')).toUpperCase()
+    }
+    if(request.input('status')){
+      categorie.status = parseInt(request.input('status'))
+    }
+   
+      await  categorie.save();
+    
 
-    return response.status(204).json({data:categorie})
+    return response.status(200).json({data:"Category has been updated"})
   }
 
   /**

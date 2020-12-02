@@ -1,0 +1,125 @@
+@layout('layouts/main')
+
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"  />
+@endsection
+@section('content')
+
+ <!-- Page Heading -->
+ <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <a href="{{route('song')}}" class="btn btn-primary" 
+    style="float:left"><i class="fas fa-fw fa-arrow-left"></i>
+    Retourner à la liste</a>
+    
+</div>
+
+
+
+
+<!-- Outer Row -->
+<div class="row justify-content-center">
+
+    <div class="col-xl-12 col-lg-12 col-md-12">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <form class="user" id="msform">
+                <div class="row">
+                    <div class="col-lg-12 p-5 text-center">
+                        <h4>Ajouter un chant</h4>
+                       
+                    </div>
+                   
+                    <div class="col-lg-6">
+                        <div class="p-3">
+
+                           
+                                <div class="form-group">
+                                    <label>Choisir  le secteur</label>
+                                    
+                                    <select name="categorie_id" id="categorie_id" class="myselect require4 form-control">
+                                      <option selected></option>  
+                                   
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom">Nom</label>
+                                    <input type="text" name="nom" class="require1 form-control " placeholder="Entrer le nom">
+                                </div>
+                                <div class="form-group">
+                                <label for="nom">Prénom</label>
+                                <input type="text" name="prenom" class="require2 form-control " placeholder="Entrer le Prénom">
+                            </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input  type="radio" class="custom-control-input" checked id="customRadio" name="genre" value="M">
+                                    <label class="custom-control-label" for="customRadio">Homme</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="customRadio2" name="genre" value="F">
+                                    <label class="custom-control-label" for="customRadio2">Femme</label>
+                                </div>
+
+                        
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="p-3">
+                        <div class="form-group">
+                                    
+                                </div>
+                            <div class="form-group">
+                                <label>Téléphone</label>
+                                <input type="text" name="telephone" class=" form-control " placeholder="Entrer le numero de téléphone">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cni">Numéro de pièce CNI</label>
+                                <input type="text" name="CNI" class="form-control " placeholder="Entrer le contact">
+                            </div>
+                            <div class="form-group">
+                                <label for="cni">Numéro de carte d'électeur</label>
+                                <input type="text" name="CE" class="form-control " placeholder="CE">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Date de naissance</label>
+                                <input type="date" name="date_naissance" class="form-control " placeholder="Ex:">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-5 col-lg-6 mx-auto text-center">
+                        <button type="submit" id="btn_submit" class="btn_submit btn btn-primary  btn-block">
+                            Modifier
+                          </button>
+                          <button id="btn_load" style="display: none;" class="btn_load btn btn-primary btn-block">
+                            <i class="fa fa-refresh fa-spin"></i>Loading
+                          </button>
+                    </div>
+                   
+                </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{{  csrfField()  }}
+
+
+@endsection
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js" ></script>
+
+{{script(appUrl('ajax/song/add.js'))}}
+@endsection

@@ -1,14 +1,13 @@
 'use strict'
-const CategoryController = use('App/Controllers/Http/Api/CategorieController');
+const Songcontroller = use('App/Controllers/Http/Api/SongController');
 
-
-class CategorieController extends CategoryController{
+class SongController extends Songcontroller {
     listView({ view }) {
-        return view.render('pages.category.list')
+        return view.render('pages.song.list')
     }
 
     addView({ view }) {
-        return view.render('pages.category.add')
+        return view.render('pages.song.add')
     }
 
     async createCategory({ request, response}){
@@ -38,4 +37,4 @@ class CategorieController extends CategoryController{
      }
 }
 
-module.exports = CategorieController
+module.exports = SongController

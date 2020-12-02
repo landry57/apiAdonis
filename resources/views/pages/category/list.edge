@@ -1,0 +1,158 @@
+@layout('layouts/main')
+
+@section('css')
+<!-- Custom styles for this page -->
+{{style("assets/vendor/datatables/dataTables.bootstrap4.min.css")}}
+{{style("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css")}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+@endsection
+@section('content')
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Categories</h1>
+  <a href="#" data-toggle="modal" data-target="#addModal"
+    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+      class="fas fa-plus-circle fa-sm text-white-50"></i> Ajout</a>
+</div>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Liste Categories</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Date</th>
+        
+            <th width="50px" class="mx-auto">Actions</th>
+          </tr>
+        </thead>
+       
+        <tbody>
+         
+        
+     
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- add Modal-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="route" value="{{route('/addCategory')}}">
+        <form id="addCategorie" method="POST" >
+          <div class="row">
+           
+            <div class="col-lg-12 mx-auto">
+              <div class="p-3">
+
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" name="categorieName" class="form-control " placeholder="Entrer le nom">
+                </div>
+
+              </div>
+              <div class="p-5 col-lg-6 mx-auto text-center">
+
+                <button type="submit" id="btn_submit" class="btn btn-primary  btn-block">
+                  Enregistrer
+                </button>
+                <button id="btn_load" style="display: none;" class="btn btn-primary btn-block">
+                  <i class="fa fa-refresh fa-spin"></i>Loading
+                </button>
+
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- add edit-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="editRoute" id="editRoute">
+        <form id="editCategorie" method="PUT" >
+          <div class="row">
+            <input type="hidden" name="id" id="categoryId">
+            <div class="col-lg-12 mx-auto">
+              <div class="p-3">
+
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" id="editCategorieName" name="categorieName" class="form-control " placeholder="Entrer le nom">
+                </div>
+
+              </div>
+              <div class="p-5 col-lg-6 mx-auto text-center">
+
+                <button type="submit" id="btn_submit" class="btn_submit btn btn-primary  btn-block">
+                  Modifier
+                </button>
+                <button id="btn_load" style="display: none;" class="btn_load btn btn-primary btn-block">
+                  <i class="fa fa-refresh fa-spin"></i>Loading
+                </button>
+
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{{  csrfField()  }}
+@endsection
+
+@section('js')
+
+{{script("assets/vendor/datatables/jquery.dataTables.min.js")}}
+{{script("assets/vendor/datatables/dataTables.bootstrap4.min.js")}}
+{{script("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js")}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+{{script(appUrl('ajax/category/add.js'))}}
+
+@endsection
