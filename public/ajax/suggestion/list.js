@@ -65,7 +65,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
             return `<a href="/song/edit/` + row.id + `" style="color:blue;cursor:pointer;" > 
                 <i class="fas fa-fw fa-edit"></i></a>
-                <a class="delete" href="/deleteSong/` + row.id + `" style="color:red;cursor:pointer;" > 
+                <a class="delete" href="deleteSong/` + row.id + `" style="color:red;cursor:pointer;" > 
                 <i class="fas fa-fw fa-trash"></i></a>
                 <a class="show" href="/songbyid/` + row.id + `" style="color:green;cursor:pointer;" > 
                 <i class="fas fa-fw fa-eye"></i></a>`;

@@ -21,7 +21,7 @@ class CorrectionController {
    */
   async index ({ request, response, view }) {
     const corrections = await Correction.query()
-    .with('song').fetch();
+    .with('song.category').fetch();
     return response.status(200).json({
       data: corrections,
     });
@@ -158,7 +158,29 @@ class CorrectionController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy ({ request, response }) {
+    try {
+      const correction = await Correction.find(parseInt(request.input('id')));
+     
+      if (!correction) {
+        return response.status(400).json({ error: 'correction not found by ID' });
+      }
+     
+      // delete picture
+      const fs = Helpers.promisify(require('fs'))
+     
+        if (correction.path != null) {
+          fs.unlink(Helpers.publicPath(correction.path));
+        }
+        correction.delete();
+      return response.status(200).json({ success: `correction deleted successfully ${params.id}` })
+    } catch (err) { }
+
+
+  }
+  
+
+  async delete ({ params, response }) {
     try {
       const correction = await Correction.find(params.id);
      
@@ -178,7 +200,6 @@ class CorrectionController {
 
 
   }
-  
 }
 
 module.exports = CorrectionController

@@ -9,7 +9,7 @@
 <!-- Page Heading -->
 <div class="row">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="{{route('song')}}" class="btn btn-primary" style="float:left"><i class="fas fa-fw fa-arrow-left"></i>
+        <a href="{{route('correction')}}" class="btn btn-primary" style="float:left"><i class="fas fa-fw fa-arrow-left"></i>
           Retourner à la liste</a>
       
       </div>
@@ -26,13 +26,14 @@
     <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
-        <input type="hidden" name="id" id="route" value="{{song.id}}">
+        <input type="hidden" name="id" id="route" value="{{correction.song_id}}">
 
         <form  id="editSong" method="PUT" enctype="multipart/form-data">
-          <input type="hidden" name="song_id"  value="{{song.id}}">
+          <input type="hidden" name="song_id"  value="{{correction.song_id}}">
+          <input type="hidden" name="id"  value="{{correction.id}}">
           <div class="row">
             <div class="col-lg-12 p-5 text-center">
-              <h4>Modifier le chant</h4>
+              <h4>Correction</h4>
 
             </div>
 
@@ -55,7 +56,7 @@
 
                 <div class="form-group">
                   <label for="title">Titre <span class="text-danger">*</span></label>
-                  <input type="text" name="title" class="require1 form-control " value="{{song.title}}" placeholder="Entrer le titre">
+                  <input type="text" name="title" class="require1 form-control " value="{{correction.title}}" placeholder="Entrer le titre">
                 </div>
                 
 
@@ -73,7 +74,7 @@
 
                 <div class="form-group">
                   <label for="type">Type</label>
-                  <input type="text" name="type"value="{{song.type?song.type:''}}" class="form-control" placeholder="Entrer le type">
+                  <input type="text" name="type"value="{{correction.type?correction.type:''}}" class="form-control" placeholder="Entrer le type">
                 </div>
               </div>
               
@@ -83,14 +84,14 @@
                <div class="col-lg-8 mx-auto">
                 <div class="form-group">
                     <label for="content">Content <span class="text-danger">*</span></label>
-                    <textarea class="form-control" name="content">{{song.content}}</textarea>
+                    <textarea class="form-control" name="content">{{correction.content}}</textarea>
                    
                   </div>
                </div>
              </div>
             <div class="p-5 col-lg-6 mx-auto text-center">
               <button type="submit" id="btn_submit" class="btn_submit btn btn-primary  btn-block">
-                Modifier
+                Approuver
               </button>
               <button id="btn_load" style="display: none;" class="btn_load btn btn-primary btn-block">
                 <i class="fa fa-refresh fa-spin"></i>Loading
@@ -116,5 +117,5 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
 {{script("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js")}}
-{{script(appUrl('ajax/song/edit.js'))}}
+{{script(appUrl('ajax/correction/edit.js'))}}
 @endsection

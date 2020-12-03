@@ -122,8 +122,9 @@ class SongController {
       return response.status(422).json({error:'You need to specify a different value to update'});
     }
 
- 
-    if (request.input('path')){
+    if (request.file('path')){
+      try {
+    
       const fs = Helpers.promisify(require('fs'))
   
         if (song.path != null) {
@@ -134,6 +135,7 @@ class SongController {
           extnames: ['mp3'],
           size: "3mb",
         });
+        
         const path_link = "uploads/songs";
         const audio_url =new Date().getTime() + "." + inputPath.subtype;
         song.path = path_link + "/" + audio_url
@@ -145,6 +147,7 @@ class SongController {
           return response.status(403).json({errors:err});
          
         }
+      }catch(err){}
      
     }
     const updateSong = new UpdateSongController()

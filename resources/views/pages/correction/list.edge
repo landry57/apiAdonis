@@ -1,0 +1,95 @@
+@layout('layouts/main')
+
+@section('css')
+<!-- Custom styles for this page -->
+{{style("assets/vendor/datatables/dataTables.bootstrap4.min.css")}}
+{{style("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css")}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<style>
+.modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+    border-top: 0 none;
+}
+</style>
+@endsection
+@section('content')
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Chants Corrigés</h1>
+  <a href="#" 
+    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+      class="fas fa-plus-circle fa-sm text-white-50"></i> Ajout</a>
+</div>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Liste des chants Corrigés</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Niveau</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th width="100px" class="mx-auto">Actions</th>
+          </tr>
+        </thead>
+       
+        <tbody>
+         
+        
+     
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- add Modal-->
+<div class="modal fade" id="songModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Texte</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="songText" class="text-center"></p>
+        
+      </div>
+      <div class="modal-footer">
+        <audio controls id="player">
+          
+        </audio>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{{  csrfField()  }}
+@endsection
+
+@section('js')
+
+{{script("assets/vendor/datatables/jquery.dataTables.min.js")}}
+{{script("assets/vendor/datatables/dataTables.bootstrap4.min.js")}}
+{{script("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js")}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+{{script(appUrl('ajax/correction/list.js'))}}
+
+@endsection

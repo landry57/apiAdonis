@@ -1,8 +1,7 @@
 'use strict'
-const Songcontroller = use('App/Controllers/Http/Api/SongController');
-const Categorie = use('App/Models/Categorie');
-const Song = use("App/Models/Song");
-class SongController extends Songcontroller {
+
+class PropositionController {
+
     listView({ view }) {
         return view.render('pages.song.list')
     }
@@ -30,7 +29,7 @@ class SongController extends Songcontroller {
         return res;
      }
 
-     async deleteSong({params, response}){
+     async deleteCategory({params, response}){
         const res =  await this.destroy ({ params, response });
         return res;
      }
@@ -48,4 +47,4 @@ class SongController extends Songcontroller {
      }
 }
 
-module.exports = SongController
+module.exports = PropositionController

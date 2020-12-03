@@ -44,7 +44,7 @@
                   <select name="categorie_id" id="categorie_id" class="myselect require4 form-control">
                     
                     @each(categorie in data)
-                    @if(categorie.id == song.categorie_id)
+                    @if(categorie.id == sond.categorie_id)
                     <option  value="{{ categorie.id }}" selected>{{ categorie.categorieName }}</option>
                     @endif
                     <option value="{{ categorie.id }}"> {{ categorie.categorieName }} </option>

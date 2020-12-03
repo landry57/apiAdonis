@@ -45,7 +45,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
         },
         {
-          "data": "category.categorieName"
+          "data": "song.category.categorieName"
 
         },
         {
@@ -63,12 +63,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
         {
           "mRender": function (data, type, row) {
 
-            return `<a href="/song/edit/` + row.id + `" style="color:blue;cursor:pointer;" > 
+            return `<a href="/correction/edit/` + row.id + `" style="color:blue;cursor:pointer;" > 
                 <i class="fas fa-fw fa-edit"></i></a>
-                <a class="delete" href="/deleteSong/` + row.id + `" style="color:red;cursor:pointer;" > 
+                <a class="delete" href="/deleteCorrection/` + row.id + `" style="color:red;cursor:pointer;" > 
                 <i class="fas fa-fw fa-trash"></i></a>
-                <a class="show" href="/songbyid/` + row.id + `" style="color:green;cursor:pointer;" > 
-                <i class="fas fa-fw fa-eye"></i></a>`;
+                <a class="showModal" href="/correctionbyid/` + row.id + `" style="color:green;cursor:pointer;" > 
+                <i class="fas fa-fw fa-eye"></i></a>
+               
+                <a class="download" href="/`+row.path+`" download><i class="fas fa-fw fa-download"></i></a>
+
+                `;
 
           }
 
@@ -92,13 +96,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     $.ajax({
       type: 'GET',
-      url: '/listSong',
+      url: '/listCorrection',
       data: false,
       cache: false,
       contentType: false,
       processData: false,
 
       success: (data) => {
+    
         if (data.data) {
          loadDataTable(data.data);
 
@@ -162,8 +167,19 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
 
 
+//dowload
+
+$(document).on("click", ".download", function (e) {
+  e.preventDefault();
+  let url = $(this).attr('href');
+
+  window.open(url)
+
+  
+  })
+  
 //show modal
-$(document).on("click", ".show", function (e) {
+$(document).on("click", ".showModal", function (e) {
 e.preventDefault();
 
 let url = $(this).attr('href');
@@ -172,7 +188,6 @@ getbyId(url)
 })
 
 const getbyId = (ur) => {
-  console.log(ur)
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': csrf_token
