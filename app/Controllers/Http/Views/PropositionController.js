@@ -1,48 +1,43 @@
 'use strict'
-
-class PropositionController {
+const SuggestionController = use('App/Controllers/Http/Api/SuggestionController');
+const SongController = use('App/Controllers/Http/Api/SongController');
+const Categorie = use('App/Models/Categorie');
+const Suggestion = use('App/Models/Suggestion');
+class PropositionController extends SuggestionController {
 
     listView({ view }) {
-        return view.render('pages.song.list')
+        return view.render('pages.suggestion.list')
     }
 
-   async addView({ view }) {
-
-      const categories = await  Categorie.all();
-      return view.render('pages.song.add', {data: categories.rows})
-    }
-
+ 
     async editView({params,view}) {
 
       const categories = await  Categorie.all();
-      const song = await Song.find(params.id)
-      return view.render('pages.song.edit', {data: categories.rows,song:song})
+      const suggestion = await Suggestion.find(params.id)
+      return view.render('pages.suggestion.edit', {data: categories.rows,suggestion:suggestion})
     }
 
-    async createSong({ request, response}){
-       const res =  await this.store({ request, response});
+    async createSong({params, request, response}){
+       const songController = new SongController();
+       let res =  await songController.store({ request, response});
        return res;
     }
 
-    async editSong({params, request, response}){
-        const res =  await this.update ({ params, request, response });
-        return res;
-     }
+  
 
-     async deleteCategory({params, response}){
+     async deleteSuggestion({params, response}){
         const res =  await this.destroy ({ params, response });
         return res;
      }
 
 
-    async getSong({response}){
+    async getSuggestion({response}){
         const res =  await this.index({response});
         return res;
      }
 
-     async getSongById({params, response}){
-      const song = await Song.find(params.id)
-        
+     async getSuggestionId({params, response}){
+      const song = await Suggestion.find(params.id)
         return response.json({data:song});
      }
 }

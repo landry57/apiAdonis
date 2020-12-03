@@ -28,12 +28,29 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   }
 
+  function deletPost(ur) {
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': csrf_token
+      }
+    });
+
+    $.ajax({
+      type: 'DELETE',
+      url: ur,
+      success: (data) => {
+        toastr.success('succès: musique ajoutée')
+        document.location.href='/song'
+      }
+    });
+  }
 
 
   const EditPost = () => {
    
     let id = document.querySelector("[name='id']").value;
-    let formData = new FormData($("#editSong")[0]);
+    let formData = new FormData($("#addSong")[0]);
   
     $.ajaxSetup({
       headers: {
@@ -42,8 +59,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
 
     $.ajax({
-      type: 'PUT',
-      url: '/editSong/'+id,
+      type: 'POST',
+      url: '/editProposition/'+id,
       data: formData,
       cache: false,
       contentType: false,
@@ -54,9 +71,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
       success: (data) => {
 
         if (data.data) {
-          toastr.success('succès: musique modifiée')
-          document.location.reload();
-          $('#editSong')[0].reset();
+          deletPost('/deleteProposition/'+id)
+        
+          $('#addSong')[0].reset();
         }
 
         loader(false);
@@ -86,7 +103,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
   }
 
-  document.getElementById('editSong').addEventListener('submit', (e) => {
+  document.getElementById('addSong').addEventListener('submit', (e) => {
     e.preventDefault();
     EditPost();
   })

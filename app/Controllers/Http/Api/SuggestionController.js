@@ -157,10 +157,10 @@ class SuggestionController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
-
+  async destroy ({ params, response }) {
+ 
     try {
-      const suggestion = await suggestion.find(params.id);
+      const suggestion = await Suggestion.find(params.id);
      
       if (!suggestion) {
         return response.status(400).json({ error: 'suggestion not found by ID' });
@@ -173,7 +173,7 @@ class SuggestionController {
           fs.unlink(Helpers.publicPath(suggestion.path));
         }
         suggestion.delete();
-      return response.status(200).json({ success: `suggestion deleted successfully ${params.id}` })
+      return response.status(200).json({ data:params.id })
     } catch (err) { }
 
 

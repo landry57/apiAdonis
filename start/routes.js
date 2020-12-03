@@ -81,9 +81,18 @@ Route.group(()=>{
    Route.get('/correctionbyid/:id','Views/CorrectionController.getCorrectionById')
    Route.get('/correction/edit/:id','Views/CorrectionController.editView')
    Route.get('/listCorrection','Views/CorrectionController.getCorrection')
+
+     //========proposition========//
+     Route.get('/proposition','Views/PropositionController.listView').as('proposition')
+     Route.get('/propositionbyid/:id','Views/PropositionController.getSuggestionId')
+     Route.get('/proposition/edit/:id','Views/PropositionController.editView')
+     Route.get('/listProposition','Views/PropositionController.getSuggestion')
+  
+
   //post
   Route.post('/addCategory','Views/CategorieController.createCategory')
   Route.post('/addSong','Views/SongController.createSong')
+  Route.post('/editProposition/:id','Views/PropositionController.createSong')
 
   //put
   Route.put('/editCategory/:id','Views/CategorieController.editCategory')
@@ -94,6 +103,7 @@ Route.group(()=>{
  Route.delete('/deleteCategory/:id','Views/CategorieController.deleteCategory')
  Route.delete('/deleteSong/:id','Views/SongController.deleteSong')
  Route.delete('/deleteCorrection/:id','Views/CorrectionController.deleteCorrection')
+ Route.delete('/deleteProposition/:id','Views/PropositionController.deleteSuggestion')
 
   
 }).middleware(['auth'])
