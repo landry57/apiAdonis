@@ -183,10 +183,11 @@ const getbyId = (ur) => {
     type: 'GET',
     url: ur,
     success: (data) => {
-      const res = data.data;
+      let res = data.data;
+      if (res){
       $('#songText').text(res.content);
       $('#player').append(`<source   src="`+res.path+`" type="audio/mpeg">`);
-    
+      }
       $('#songModal').modal();
 
     }
