@@ -45,10 +45,9 @@ class UpdateSongController {
     if (validation.fails()) {
       return validation.messages();
     }
-
-    const data = validation._data;
-    data.status = 1;
-    const res = await UpdateSong.create(data);
+    
+   
+    const res = await UpdateSong.create({song_id:request.input('song_id'),status:1});
     return response.status(201).json({
       data: res,
     });
@@ -83,15 +82,18 @@ class UpdateSongController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    const updatesong = await UpdateSong.find(params.id);
+    const updatesong = await UpdateSong.findBy({song_id:parseInt(params.id)});
     if(!request.all()){
       return response.status(422).json({error:'You need to specify a different value to update'});
     }
-
+    
+    if (updatesong){
     updatesong.song_id = parseInt(request.input('song_id'))
-  
+    updatesong.status=updatesong.status?0:1;
     await  updatesong.save();
-
+    }else{
+      await this.store ({ request, response })
+    }
     return response.status(204).json({data:updatesong})
   }
 

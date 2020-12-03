@@ -72,12 +72,16 @@ Route.group(()=>{
   //========SONG========//
   Route.get('/song','Views/SongController.listView').as('song')
   Route.get('/song/add','Views/SongController.addView')
-
+  Route.get('/song/edit/:id','Views/SongController.editView')
+  Route.get('/songbyid/:id','Views/SongController.getSongById')
+  Route.get('/listSong','Views/SongController.getSong')
   //post
   Route.post('/addCategory','Views/CategorieController.createCategory')
+  Route.post('/addSong','Views/SongController.createSong')
 
   //put
   Route.put('/editCategory/:id','Views/CategorieController.editCategory')
+  Route.put('/editSong/:id','Views/SongController.editSong')
 
  //delete
  Route.delete('/deleteCategory/:id','Views/CategorieController.deleteCategory')

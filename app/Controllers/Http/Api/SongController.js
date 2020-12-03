@@ -1,7 +1,12 @@
 'use strict'
 const { validate,validateAll } = use("Validator");
 const Song = use("App/Models/Song");
+const Database = use('Database');
+const UpdateSongController = use('App/Controllers/Http/Api/UpdateSongController');
+
 const Helpers = use("Helpers");
+
+
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -37,15 +42,19 @@ class SongController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+   
     const validation = await validateAll(request.all(), {
-      title: "required|string",
+      title: "required|string|unique:songs",
       content: "required|string",
-      path: "required|string",
       categorie_id: "required|integer",
     });
 
+    if (request.file('path')==null){
+      return response.status(403).json({error:"required validation failed on path"});
+    }
     if (validation.fails()) {
-      return validation.messages();
+      const err = validation.messages()
+      return response.status(403).json({errors:err});
     }
 
     const inputPath = request.file("path", {
@@ -54,6 +63,7 @@ class SongController {
     });
 
     const data = validation._data;
+    data.content = request.input('content').trim()
 
     const path_link = "uploads/songs";
     const audio_url =new Date().getTime() + "." + inputPath.subtype;
@@ -112,6 +122,7 @@ class SongController {
       return response.status(422).json({error:'You need to specify a different value to update'});
     }
 
+ 
     if (request.input('path')){
       const fs = Helpers.promisify(require('fs'))
   
@@ -130,22 +141,29 @@ class SongController {
           name:audio_url,
         });
         if (!inputPath.moved()) {
-          return inputPath.error().message;
+          const err = inputPath.error().message
+          return response.status(403).json({errors:err});
+         
         }
      
     }
+    const updateSong = new UpdateSongController()
+     await updateSong.update({ params, request, response })
     
-    song.title = request.input('title')
-    song.author = request.input('author')
-    song.content = request.input('content')
-    song.imei = request.input('imei')
-    song.type = request.input('type')
-    song.status = parseInt(request.input('status'))
-    song.categorie_id = parseInt(request.input('categorie_id'))
+      song.title = request.input('title')
+      song.author = request.input('author')
+      song.content = request.input('content').trim()
+      song.imei = request.input('imei')
+      song.type = request.input('type')
+      if(request.input('status')){
+      song.status = parseInt(request.input('status'))
+      }
+      song.categorie_id = parseInt(request.input('categorie_id'))
   
+ 
     await  song.save();
 
-    return response.status(204).json({data:song})
+    return response.status(200).json({data:"Song has been updated"})
   }
 
   /**
