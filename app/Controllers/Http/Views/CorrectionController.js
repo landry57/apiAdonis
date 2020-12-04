@@ -5,8 +5,9 @@ const Correction = use("App/Models/Correction");
 const SongController = use("App/Controllers/Http/Api/SongController");
 class CorrectionController extends CorrectionSongcontroller{
 
-    listView({ view }) {
-        return view.render('pages.correction.list')
+   async listView({ view,auth }) {
+      const user = await auth.user
+        return view.render('pages.correction.list',{user:user})
     }
 
    async addView({ view }) {

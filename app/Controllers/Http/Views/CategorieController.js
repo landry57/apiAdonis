@@ -3,8 +3,9 @@ const CategoryController = use('App/Controllers/Http/Api/CategorieController');
 
 
 class CategorieController extends CategoryController{
-    listView({ view }) {
-        return view.render('pages.category.list')
+    async listView({ view,auth }) {
+      const user = await auth.user
+        return view.render('pages.category.list',{user:user})
     }
 
     addView({ view }) {

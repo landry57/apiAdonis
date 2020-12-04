@@ -5,8 +5,9 @@ const Categorie = use('App/Models/Categorie');
 const Suggestion = use('App/Models/Suggestion');
 class PropositionController extends SuggestionController {
 
-    listView({ view }) {
-        return view.render('pages.suggestion.list')
+   async listView({ view,auth }) {
+      const user = await auth.user
+        return view.render('pages.suggestion.list',{user:user})
     }
 
  

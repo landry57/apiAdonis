@@ -3,8 +3,10 @@ const Songcontroller = use('App/Controllers/Http/Api/SongController');
 const Categorie = use('App/Models/Categorie');
 const Song = use("App/Models/Song");
 class SongController extends Songcontroller {
-    listView({ view }) {
-        return view.render('pages.song.list')
+   
+   async listView({ view,auth }) {
+      const user = await auth.user
+        return view.render('pages.song.list',{user:user})
     }
 
    async addView({ view }) {
