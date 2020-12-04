@@ -16,6 +16,15 @@
        {{style("/assets/css/sb-admin-2.min.css")}}
        {{style("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css")}}
 
+       <style>
+        .modal-header {
+            border-bottom: 0 none;
+        }
+        
+        .modal-footer {
+            border-top: 0 none;
+        }
+        </style>
 </head>
 
 <body class="bg-gradient-primary">
@@ -25,14 +34,14 @@
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+            <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                            
-                            <div class="col-lg-12 mx-auto">
+                            <div class="col-lg-12 col-sm-12 mx-auto">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
@@ -54,17 +63,17 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <button type="submit" id="btn_submit" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" id="btn_submit" class="btn_submit btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
-                                        <a id="btn_load" style="display: none;" class="btn btn-primary btn-user btn-block">
+                                        <a id="btn_load" style="display: none;" class=" btn_load btn btn-primary btn-user btn-block">
                                           <i class="fa fa-refresh fa-spin"></i>Loading
                                         </a>
                                        
                                     </form>
                                     
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="#" data-toggle="modal" data-target="#modal-forgot">Forgot Password?</a>
                                     </div>
                                     
                                 </div>
@@ -79,6 +88,67 @@
 
     </div>
     {{  csrfField()  }}
+
+
+
+
+
+ <!-- Ajout modal -->
+ <div class="modal fade" id="modal-forgot">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Mot de passe oublié </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <form id="forgotForm"  method="POST" >
+            <div class="row">
+            
+                <div class="col-lg p-3">
+                    <div class="form-group row">
+                        <label for="nom">Email </label>
+                        <span style="color: red; font-size:16px ">*</span>
+                        <input type="text"  name="email" class="form-control" id="email" placeholder="email...">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="form-group">
+                    
+                        <div class="row">
+                            <div class="col-lg text-right">
+                                <button type="submit" id="btn_submit2" class="btn_submit btn btn-primary btn-user btn-block">
+                                    Demander un mot de passe
+                                </button>
+                                <a id="btn_load2" style="display: none;" class=" btn_load btn btn-primary btn-user btn-block">
+                                  <i class="fa fa-refresh fa-spin"></i>Loading
+                                </a>
+                               
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+         </form>
+        </div>
+        <div class="modal-footer justify-content-between">
+        
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+
     <!-- Bootstrap core JavaScript-->
     {{script("./assets/vendor/jquery/jquery.min.js")}}
     {{script("./assets/vendor/bootstrap/js/bootstrap.bundle.min.js")}}

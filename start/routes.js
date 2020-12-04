@@ -93,6 +93,7 @@ Route.group(()=>{
   Route.post('/addCategory','Views/CategorieController.createCategory')
   Route.post('/addSong','Views/SongController.createSong')
   Route.post('/editProposition/:id','Views/PropositionController.createSong')
+  Route.post('logout', 'Views/LoginController.PostLogout').as('logout')
 
   //put
   Route.put('/editCategory/:id','Views/CategorieController.editCategory')
@@ -110,6 +111,8 @@ Route.group(()=>{
 
 
 Route.get('/login','Views/LoginController.loginView').as('login')
+
 //posts
 Route.post('/login','Views/LoginController.postLogin').as('login')
-Route.post('logout', 'Views/LoginController.PostLogout').as('logout')
+Route.post('/resetpass','Views/LoginController.sendResetPass').as('resetpass')
+  
