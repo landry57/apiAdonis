@@ -66,13 +66,15 @@ class SongController {
     data.content = request.input('content').trim()
 
     const path_link = "uploads/songs";
-    const audio_url =new Date().getTime() + "." + inputPath.subtype;
+    const audio_url =new Date().getTime() + ".mp3";
     data.path = path_link + "/" + audio_url
     await inputPath.move(Helpers.publicPath(path_link), {
       name:audio_url,
     });
     if (!inputPath.moved()) {
-      return inputPath.error().message;
+      const err = inputPath.error().message
+          return response.status(403).json({errors:err});
+         
     }
 
 
@@ -137,7 +139,7 @@ class SongController {
         });
         
         const path_link = "uploads/songs";
-        const audio_url =new Date().getTime() + "." + inputPath.subtype;
+        const audio_url =new Date().getTime() + ".mp3";
         song.path = path_link + "/" + audio_url
         await inputPath.move(Helpers.publicPath(path_link), {
           name:audio_url,
@@ -185,7 +187,11 @@ class SongController {
       if (!song) {
         return response.status(400).json({ error: 'song not found by ID' });
       }
-     
+      
+       await Database
+      .table('trashes')
+      .insert({song_id: params.id})
+
       // delete picture
       const fs = Helpers.promisify(require('fs'))
      

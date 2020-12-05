@@ -27,6 +27,7 @@ Route.post('/auth/password/reset', 'Api/auth/PasswordResetController.reset')
 Route.group(() => {
   Route.get('/songs', 'Api/SongController.index')
   Route.get('/updatesongs', 'Api/UpdateSongController.index')
+  Route.get('/deletesongs', 'Api/TrashController.index')
   Route.post('/suggestion', 'Api/SuggestionController.store')
   Route.post('/correction', 'Api/CorrectionController.store')
 }).prefix('api/v1')

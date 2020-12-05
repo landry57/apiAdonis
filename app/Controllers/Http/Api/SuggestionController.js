@@ -41,31 +41,33 @@ class SuggestionController {
     const validation = await validateAll(request.all(), {
       title: "required|string",
       content: "required|string",
-      path: "required|string",
       categorie_id: "required|integer",
     });
 
     if (validation.fails()) {
       return validation.messages();
     }
+    const data = validation._data;
 
+    if(request.file("path")){
     const inputPath = request.file("path", {
-      extnames: ['mp3'],
+     
       size: "3mb",
     });
 
-    const data = validation._data;
-
+    
     const path_link = "uploads/songs";
-    const audio_url =new Date().getTime() + "." + inputPath.subtype;
+    const audio_url =new Date().getTime() + "."+ inputPath.subtype;;
     data.path = path_link + "/" + audio_url
     await inputPath.move(Helpers.publicPath(path_link), {
       name:audio_url,
     });
     if (!inputPath.moved()) {
-      return inputPath.error().message;
+      const err = inputPath.error().message
+          return response.status(403).json({errors:err});
+         
     }
-
+  }
 
     if (request.input("type")) {
       data.type = request.input("type");
@@ -121,9 +123,10 @@ class SuggestionController {
         }
 
         const inputPath = request.file("path", {
-          extnames: ['mp3'],
+    
           size: "3mb",
         });
+        
         const path_link = "uploads/songs";
         const audio_url =new Date().getTime() + "." + inputPath.subtype;
         suggestion.path = path_link + "/" + audio_url
@@ -131,7 +134,9 @@ class SuggestionController {
           name:audio_url,
         });
         if (!inputPath.moved()) {
-          return inputPath.error().message;
+           const err = inputPath.error().message
+          return response.status(403).json({errors:err});
+         
         }
      
     }

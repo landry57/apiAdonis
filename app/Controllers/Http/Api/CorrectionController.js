@@ -40,7 +40,6 @@ class CorrectionController {
     const validation = await validateAll(request.all(), {
       title: "required|string",
       content: "required|string",
-      path: "required|string",
       song_id: "required|integer",
     });
 
