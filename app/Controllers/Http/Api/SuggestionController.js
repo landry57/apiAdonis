@@ -45,7 +45,9 @@ class SuggestionController {
     });
 
     if (validation.fails()) {
-      return validation.messages();
+      const err = ivalidation.messages();
+      return response.status(403).json({errors:err});
+     
     }
     const data = validation._data;
 

@@ -40,15 +40,16 @@ class CorrectionController {
     const validation = await validateAll(request.all(), {
       title: "required|string",
       content: "required|string",
-      song_id: "required|integer",
+      song_id: "required",
     });
 
     if (validation.fails()) {
-      return validation.messages();
+      const err = ivalidation.messages();
+      return response.status(403).json({errors:err});
+     
     }
 
     const inputPath = request.file("path", {
-      extnames: ['mp3'],
       size: "3mb",
     });
 
@@ -61,7 +62,9 @@ class CorrectionController {
       name:audio_url,
     });
     if (!inputPath.moved()) {
-      return inputPath.error().message;
+      const err = inputPath.error().message
+          return response.status(403).json({errors:err});
+         
     }
 
 
@@ -121,7 +124,6 @@ class CorrectionController {
         }
 
         const inputPath = request.file("path", {
-          extnames: ['mp3'],
           size: "3mb",
         });
         const path_link = "uploads/songs";
@@ -131,7 +133,9 @@ class CorrectionController {
           name:audio_url,
         });
         if (!inputPath.moved()) {
-          return inputPath.error().message;
+          const err = inputPath.error().message
+          return response.status(403).json({errors:err});
+         
         }
      
     }
