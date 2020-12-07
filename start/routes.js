@@ -68,9 +68,9 @@ Route.group(() => {
   //get
   Route.get('/home', 'Views/HomeController.home').as('home')
   Route.get('/groupby', 'Views/HomeController.groupByCategory')
-  Route.get('/category', 'Views/CategorieController.listView').as('category')
-  Route.get('/category/:id', 'Views/CategorieController.getCategoryById')
-  Route.get('/listCategory', 'Views/CategorieController.getCategory')
+  //Route.get('/category', 'Views/CategorieController.listView').as('category')
+  //Route.get('/category/:id', 'Views/CategorieController.getCategoryById')
+  //Route.get('/listCategory', 'Views/CategorieController.getCategory')
   //========SONG========//
   Route.get('/song', 'Views/SongController.listView').as('song')
   Route.get('/song/add', 'Views/SongController.addView')
@@ -92,18 +92,18 @@ Route.group(() => {
 
 
   //post
-  Route.post('/addCategory', 'Views/CategorieController.createCategory')
+  //Route.post('/addCategory', 'Views/CategorieController.createCategory')
   Route.post('/addSong', 'Views/SongController.createSong')
   Route.post('/editProposition/:id', 'Views/PropositionController.createSong')
   Route.post('logout', 'Views/LoginController.PostLogout').as('logout')
 
   //put
-  Route.put('/editCategory/:id', 'Views/CategorieController.editCategory')
+  //Route.put('/editCategory/:id', 'Views/CategorieController.editCategory')
   Route.put('/editSong/:id', 'Views/SongController.editSong')
   Route.put('/editCorrection/:id', 'Views/CorrectionController.editCorrection')
 
   //delete
-  Route.delete('/deleteCategory/:id', 'Views/CategorieController.deleteCategory')
+  //Route.delete('/deleteCategory/:id', 'Views/CategorieController.deleteCategory')
   Route.delete('/deleteSong/:id', 'Views/SongController.deleteSong')
   Route.delete('/deleteCorrection/:id', 'Views/CorrectionController.deleteCorrection')
   Route.delete('/deleteProposition/:id', 'Views/PropositionController.deleteSuggestion')
