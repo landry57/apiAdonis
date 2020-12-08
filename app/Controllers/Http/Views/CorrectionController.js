@@ -24,43 +24,43 @@ class CorrectionController extends CorrectionSongcontroller{
     }
 
     async createCorrection({ request, response}){
-      if (request.pjax()) {
+     
         
        const res =  await this.store({ request, response});
        return res;
-      }
+      
     }
 
     async editCorrection({params, request, response}){
-      if (request.pjax()) {
+      
         const songctrl= new SongController();
          let res =  await songctrl.update ({ params, request, response });
          res = await this.destroy({request, response });
         return res;
-      }
+      
      }
 
      async deleteCorrection({request,params, response}){
-      if (request.pjax()) {
+    
         const res =  await this.delete({ params, response });
         return res;
-      }
+      
      }
 
 
     async getCorrection({request,response}){
-      if (request.pjax()) {
+     
         const res =  await this.index({response});
         return res;
-      }
+      
      }
 
      async getCorrectionById({request,params, response}){
-      if (request.pjax()) {
+    
       const song = await Correction.find(params.id)
         
         return response.json({data:song});
-      }
+      
      }
 }
 
