@@ -13,29 +13,39 @@ class CategorieController extends CategoryController{
     }
 
     async createCategory({ request, response}){
+      if (request.pjax()) {
        const res =  await this.store({ request, response});
        return res;
+      }
     }
 
     async editCategory({params, request, response}){
+      if (request.pjax()) {
         const res =  await this.update ({ params, request, response });
         return res;
+      }
      }
 
-     async deleteCategory({params, response}){
+     async deleteCategory({request,params, response}){
+      if (request.pjax()) {
         const res =  await this.destroy ({ params, response });
         return res;
+      }
      }
 
 
-    async getCategory({response}){
+    async getCategory({request,response}){
+      if (request.pjax()) {
         const res =  await this.index({response});
         return res;
+      }
      }
 
-     async getCategoryById({params, response}){
+     async getCategoryById({request,params, response}){
+      if (request.pjax()) {
         const res =  await this.show({params, response});
         return res;
+      }
      }
 }
 

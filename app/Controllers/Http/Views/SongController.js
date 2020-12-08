@@ -23,30 +23,40 @@ class SongController extends Songcontroller {
     }
 
     async createSong({ request, response}){
+      if (request.pjax()) {
        const res =  await this.store({ request, response});
        return res;
+      }
     }
 
     async editSong({params, request, response}){
+      if (request.pjax()) {
         const res =  await this.update ({ params, request, response });
         return res;
+      }
      }
 
-     async deleteSong({params, response}){
+     async deleteSong({request,params, response}){
+      if (request.pjax()) {
         const res =  await this.destroy ({ params, response });
         return res;
+      }
      }
 
 
-    async getSong({response}){
+    async getSong({request,response}){
+      if (request.pjax()) {
         const res =  await this.index({response});
         return res;
+      }
      }
 
-     async getSongById({params, response}){
+     async getSongById({request,params, response}){
+      if (request.pjax()) {
       const song = await Song.find(params.id)
         
         return response.json({data:song});
+      }
      }
 }
 

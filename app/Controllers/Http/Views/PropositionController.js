@@ -18,28 +18,36 @@ class PropositionController extends SuggestionController {
       return view.render('pages.suggestion.edit', {data: categories.rows,suggestion:suggestion})
     }
 
-    async createSong({params, request, response}){
+    async createSong({ request, response}){
+      if (request.pjax()) {
        const songController = new SongController();
        let res =  await songController.store({ request, response});
        return res;
+      }
     }
 
   
 
-     async deleteSuggestion({params, response}){
+     async deleteSuggestion({request,params, response}){
+      if (request.pjax()) {
         const res =  await this.destroy ({ params, response });
         return res;
+      }
      }
 
 
-    async getSuggestion({response}){
+    async getSuggestion({request,response}){
+      if (request.pjax()) {
         const res =  await this.index({response});
         return res;
+      }
      }
 
-     async getSuggestionId({params, response}){
+     async getSuggestionId({request,params, response}){
+      if (request.pjax()) {
       const song = await Suggestion.find(params.id)
         return response.json({data:song});
+      }
      }
 }
 

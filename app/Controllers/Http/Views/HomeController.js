@@ -31,7 +31,8 @@ class HomeController {
 
 
 
-    async groupByCategory({response}){
+    async groupByCategory({request,response}){
+        if (request.pjax()) {
         const group = await Database.from('categories')
         .select('categories.categorieName')
         .count('songs.id AS nombre')
@@ -39,6 +40,7 @@ class HomeController {
         .groupBy('categories.categorieName')
         
         return response.status(200).json({data:group});
+        }
     }
 
 }
