@@ -18,17 +18,20 @@ class LoginController extends AuthController{
     }
 
     async postLogin({ request, auth, response}) {
-     
-        const res=  await this.login( { request, auth, response});
+     if (request.ajax()) {
+    const res=  await this.login( { request, auth, response});
         return res;
+     }
+      
       
     }
 
     
     async postRegister({ request, auth, response}) {
-      
+       if (request.ajax()) {
       const res=  await this.register({ request, auth, response})
       return res;
+       }
       
     }
 
@@ -36,7 +39,7 @@ class LoginController extends AuthController{
 
   
     async sendResetPass ({ request, response }) {
-      
+      if (request.ajax()) {
       // validate form inputs
       const validation = await validate(request.only('email'), {
         email: 'required|email'
@@ -75,16 +78,17 @@ class LoginController extends AuthController{
        
         return response.status(400).json({'error':'Sorry, there is no user with this email address.'})
       }
+    }
     
     }
   
 
 
     async PostLogout({request,  auth, response}) {
-      
+      if (request.ajax()) {
         const res= await this.logout( {  auth, response});
         return res;
-      
+      }
     }
   
 

@@ -38,7 +38,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
   const loginPost = () => {
-    let route = document.querySelector('#loginForm').action;
+    let route = "/login";
     let formData = new FormData($("#loginForm")[0]);
 
     $.ajaxSetup({
@@ -58,13 +58,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
         loader(true);
       },
       success: (data) => {
-        console.log(data)
+       try {
+         
+       
         if (data.data) {
           toastr.success('succès: Rédirection...')
           window.location.href = "/home";
           $('#loginForm')[0].reset();
         }
 
+         }catch (error) {
+         
+        }
         loader(false);
       },
       error: function (data) {
