@@ -44,7 +44,7 @@ class CorrectionController {
     });
 
     if (validation.fails()) {
-      const err = ivalidation.messages();
+      const err = validation.messages();
       return response.status(403).json({errors:err});
      
     }

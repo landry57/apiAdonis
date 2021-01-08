@@ -31,6 +31,7 @@ Route.group(() => {
   Route.post('/suggestion', 'Api/SuggestionController.store')
   Route.post('/correction', 'Api/CorrectionController.store')
 }).prefix('api/v1')
+
 Route.group(() => {
   Route.get('/categories', 'Api/CategorieController.index')
   Route.get('/categorie/:id', 'Api/CategorieController.show')
