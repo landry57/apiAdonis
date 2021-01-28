@@ -74,7 +74,19 @@
 
                 <div class="form-group">
                   <label for="type">Type</label>
-                  <input type="text" name="type"value="{{correction.type?correction.type:''}}" class="form-control" placeholder="Entrer le type">
+                  <select name="type" id="type_id" class="type_id require4 form-control">
+                 
+                    <option value="Ambiance" {{ (correction.type=='Ambiance')? selected :'' }} > Ambiance </option>
+                    <option value="Chant" {{correction.type=='Chant'?selected:''}}) > Chant </option>
+                    <option value="Comptine" {{correction.type=='Comptine'?selected :""}}) > Comptine </option>
+                    <option value="Éducatif" {{correction.type=='Éducatif'?selected :""}}) > Educatif </option>
+                    <option value="Interactif" {{correction.type=='Interactif'?selected : ""}}) > Interactif </option>
+                    <option value="Langue" {{correction.type=='Langue'?selected:""}}) > Langue </option>
+                    <option value="Mémorisation" {{correction.type=='Mémorisation'?selected :""}}) > Mémorisation </option>
+                    <option value="Poésie" {{correction.type=='Poésie'?selected:""}} > Poésie </option>
+                   
+                  </select>
+                  
                 </div>
               </div>
               

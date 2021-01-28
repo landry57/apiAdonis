@@ -9,7 +9,7 @@ class SongSchema extends Schema {
       table.increments('id')
       table.string('title',100).nullable();
       table.string('author',100).nullable();
-      table.string('content').nullable();
+      table.text('content').nullable();
       table.string('path',100).nullable();
       table.string('type',100).nullable();
       table.string('imei',20).nullable();

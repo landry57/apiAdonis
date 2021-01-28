@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let csrf_token = document.querySelector('[name="_csrf"]').value;
 
   $('#categorie_id').select2()
-
+  $('#type_id').select2()
   //erros array
   let errosArray = new Array();
   errosArray['E_USER_NOT_FOUND: Cannot find user with email as la@gmail.com'] = "Email non valide";

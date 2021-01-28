@@ -73,7 +73,20 @@
 
                 <div class="form-group">
                   <label for="type">Type</label>
-                  <input type="text" name="type"value="{{song.type?song.type:''}}" class="form-control" placeholder="Entrer le type">
+                  <select name="type" id="type_id" class="type_id require4 form-control">
+                
+                    <option value="Ambiance" {{ (song.type=='Ambiance')? selected :'' }} > Ambiance </option>
+                    <option value="Chant" {{song.type=='Chant'?selected:''}}) > Chant </option>
+                    <option value="Comptine" {{song.type=='Comptine'?selected :""}}) > Comptine </option>
+                    <option value="Éducatif" {{song.type=='Éducatif'?selected :""}}) > Educatif </option>
+                    <option value="Interactif" {{song.type=='Interactif'?selected : ""}}) > Interactif </option>
+                    <option value="Langue" {{song.type=='Langue'?selected:""}}) > Langue </option>
+                    <option value="Mémorisation" {{song.type=='Mémorisation'?selected :""}}) > Mémorisation </option>
+                    <option value="Poésie" {{song.type=='Poésie'?selected:""}} > Poésie </option>
+                   
+
+                  </select>
+                
                 </div>
               </div>
               

@@ -73,7 +73,19 @@
 
                 <div class="form-group">
                   <label for="type">Type</label>
-                  <input type="text" name="type"value="{{suggestion.type?suggestion.type:''}}" class="form-control" placeholder="Entrer le type">
+                  <select name="type" id="type_id" class="type_id require4 form-control">
+                    <option value="Ambiance" {{ (suggestion.type=='Ambiance')? selected :'' }} > Ambiance </option>
+                    <option value="Chant" {{suggestion.type=='Chant'?selected:''}}) > Chant </option>
+                    <option value="Comptine" {{suggestion.type=='Comptine'?selected :""}}) > Comptine </option>
+                    <option value="Éducatif" {{suggestion.type=='Éducatif'?selected :""}}) > Educatif </option>
+                    <option value="Interactif" {{suggestion.type=='Interactif'?selected : ""}}) > Interactif </option>
+                    <option value="Langue" {{suggestion.type=='Langue'?selected:""}}) > Langue </option>
+                    <option value="Mémorisation" {{suggestion.type=='Mémorisation'?selected :""}}) > Mémorisation </option>
+                    <option value="Poésie" {{suggestion.type=='Poésie'?selected:""}} > Poésie </option>
+                   
+                  
+                  </select>
+               
                 </div>
               </div>
               

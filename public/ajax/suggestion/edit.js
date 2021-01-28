@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let csrf_token = document.querySelector('[name="_csrf"]').value;
 
   $('#categorie_id').select2()
+  $('#type_id').select2()
 
   //erros array
   let errosArray = new Array();

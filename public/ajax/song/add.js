@@ -5,11 +5,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   $('#categorie_id').select2()
 
+  $('#type_id').select2()
+
   //erros array
   let errosArray = new Array();
   errosArray['E_USER_NOT_FOUND: Cannot find user with email as la@gmail.com'] = "Email non valide";
   errosArray["E_PASSWORD_MISMATCH: Cannot verify user password"] = "Mot de passe incorrecte"
   errosArray["required validation failed on path"] = "Le champ audio est requis"
+  errosArray["required validation failed on type"] = "Le champ type est requis"
   errosArray["required validation failed on content"] = "Le champ contenu est requis"
   errosArray["required validation failed on title"] = "Le champ titre est requis"
   errosArray["required validation failed on categorie_id"] = "Le champ niveau est requis"

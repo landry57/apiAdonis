@@ -46,6 +46,7 @@ class SongController {
     const validation = await validateAll(request.all(), {
       title: "required|string|unique:songs",
       content: "required|string",
+      type: "required|string",
       categorie_id: "required|integer",
     });
 
@@ -78,9 +79,7 @@ class SongController {
     }
 
 
-    if (request.input("type")) {
-      data.type = request.input("type");
-    }
+  
     if (request.input("imei")) {
       data.imei = request.input("imei");
     }
